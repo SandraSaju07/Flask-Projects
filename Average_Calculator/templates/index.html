@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Marksheet Form</h1>
+        <form action="/submit" method="post">
+            <label for="statistics">Statistics :</label><br>
+            <input type="text" id="statistics" name="statistics" value="0"><br><br>
+            <label for="maths">Maths :</label><br>
+            <input type="text" id="maths" name="maths" value="0"><br><br>
+            <label for="datascience">Data Science: </label><br>
+            <input type="text" id="datascience" name="datascience" value="0"><br><br>
+            <label for="python">Python :</label><br>
+            <input type="text" id="python" name="python" value="0"><br><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <p>If you click the "Submit" button the form data will be sent to a page called "/submit" which in turn goes to 
+            the "/success" or "/fail" page based on the average score.</p>
+    </body>
+</html>
