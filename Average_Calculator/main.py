@@ -8,11 +8,13 @@ def marksheet():
 
 @app.route('/success/<int:score>')
 def passed(score):
-    return render_template('result.html',result="passed",score=score)
+    Output = {"Score":score,"Result":"Passed"}
+    return render_template('result.html',output=Output)
 
 @app.route('/fail/<int:score>')
 def failed(score):
-    return render_template('result.html',result="failed",score=score)
+    Output = {"Score":score,"Result":"Failed"}
+    return render_template('result.html',output=Output)
 
 @app.route('/submit',methods=['POST','GET'])
 def submit():

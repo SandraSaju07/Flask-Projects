@@ -2,8 +2,17 @@
 <html>
     <h1>Final Result</h1>
     <body>
-        <h2>Your score is {{ score }} and you have {{ result }}</h2>
-        <br<br<br>
+        <h2>Result Sheet</h2>
+        {# Table Section #}
+        <table border="2">
+            {% for score,result in output.items() %}
+                <tr>
+                    <th>{{ score }}</th>
+                    <th>{{ result }}</th>
+                </tr>
+            {% endfor %}
+        </table>
+        <br<br<br><br><br>
         <button onclick="window.location.href = '/';">View Marksheet</button>
     </body>
 </html>
