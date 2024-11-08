@@ -17,6 +17,32 @@ def generate_frames():
         if not success:
             break
         else:
+            # Loads pretrained haarcascade classifiers for face and eye detection from XML files
+            face_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface.xml')  
+            eye_cascade = cv2.CascadeClassifier('./haarcascades/haarcascade_eye.xml')
+
+            # Detect faces in a given frame and returns rectangle coorindates where faces are detected. 
+            # The image size is scaled down by 10% each time by the scale factor 1.1
+            # The minNeighbors parameter (7) specifies how many faces will be detected. A high value detects few faces
+            #  and reduces face positives. 
+            faces = face_cascade.detectMultiScale(frame, 1.1, 7)
+
+            # Converts frame from colored (BGR) to gray scale image. Haarcascade classifiers work more effectively with 
+            # gray scale images due to reduced data complexity.
+            gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)  
+
+            # Fech each rectangle coordinates
+            for (x,y,w,h) in faces:
+                cv2.rectangle(frame,(x,y), (x+w,y+h), (255,0,0), 2)  # Draw the rectangle
+                roi_gray = gray[y:y+h, x:x+w]  # Grayscle version of the exact face area
+                roi_color = frame[y:y+h, x:x+w]  # Colored version of the exact face area
+
+                # Detect eyes whithin the face region
+                eyes = eye_cascade.detectMultiScale(roi_gray, 1.1, 7)
+                # Fetch each eye coorindates and draws rectangle
+                for (ex,ey,ew,eh) in eyes:
+                    cv2.rectangle(roi_color, (ex,ey), (ex+ew, ey+eh), (0,255,0), 2)
+
             # Encodes the captured frame as jpeg image
             _,buffer = cv2.imencode('.jpg',frame)
             # Convert the encoded image into a byte sequence which is necessary to send the frame over HTTP 
