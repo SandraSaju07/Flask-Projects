@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Webcam Stream</title>
+        <style>
+            .button-container {
+                text-align:center;
+                margin:20px 0;
+            }
+            .button-container button {
+                display:inline-block;
+                margin:0 10px;
+                padding:10px 20px;
+                font-size:16px;
+                cursor:pointer;
+            }
+            .video-container {
+            text-align: center;
+            width: 100%; 
+            }
+            .video-container img {
+                width: 100%;
+                max-width: 1000px; 
+            }
+            </style>
+    </head>
+    <body>
+        <h1 style="text-align: center;">Live Facial Recognition</h1>
+
+        <div class="button-container">
+            <a href="/start"><button>Start Camera</button></a>
+            <a href="/stop"><button>Stop Camera</button></a>
+        </div>
+
+        <!--Display Camera-->
+        {% if camera_state %}
+            <div class="video-container">
+                <img src="{{ url_for('video') }}" alt="Video Stream">
+            </div>
+        {% else %}
+            <div>
+                <p style="text-align: center;">The camera is not active, click "Start Camera" to start capturing</p>
+            </div>
+        {% endif %}
+
+    </body>
+</html>

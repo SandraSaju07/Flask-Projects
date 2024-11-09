@@ -43,7 +43,7 @@ def generate_frames():
                 for (ex,ey,ew,eh) in eyes:
                     cv2.rectangle(roi_color, (ex,ey), (ex+ew, ey+eh), (0,255,0), 2)
 
-            # Encodes the captured frame as jpeg image
+            # Encodes the captured frame as jpg image
             _,buffer = cv2.imencode('.jpg',frame)
             # Convert the encoded image into a byte sequence which is necessary to send the frame over HTTP 
             # as a binary stream.
